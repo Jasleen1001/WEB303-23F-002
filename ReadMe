@@ -1,0 +1,23 @@
+Project Name: Jasleen
+
+Description: Song
+
+dotnet new mvc -o Jasleen -no--https
+
+dotnet tool install --global dotnet-aspnet-codegenerator --version 6
+
+dotnet tool install --global dotnet-ef --version 6
+
+dotnet add package Microsoft.EntityFrameworkCore.Design --version 6
+
+dotnet add package Microsoft.EntityFrameworkCore.SQlite --version 6
+
+dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design --version 6
+
+dotnet add package Microsoft.EntityFrameworkCore.sqlServer --version 6
+
+dotnet aspnet-codegenerator controller -name SongController -m Song -dc MvcSongContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries -sqlite
+
+dotnet data -ef update 
+
+dotnet watch run
