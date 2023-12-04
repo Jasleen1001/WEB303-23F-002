@@ -1,0 +1,85 @@
+@model Jasleen.Models.SongGenreViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a> | 
+    <a asp-action="Hidden">Hidden Songs</a>
+
+</p>
+
+<form asp-controller="Song" asp-action="Index" method="get">
+    <p>
+        <select asp-for="SongGenre" asp-items="Model.Genres">
+            <option value="">All</option>
+        </select>
+        Name: <input type="text" name="searchString" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+<form asp-action="HideItem" method="get">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Select</th>
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["TitleSort"]"
+                        asp-route-searchString="@ViewData["SearchTitle"]"
+                        asp-route-SongGenres="@ViewData["SearchGenre"]">
+                        @Html.DisplayNameFor(model => model.Song[0].Title)</a>
+                </th>
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSort"]"
+                        asp-route-searchString="@ViewData["SearchTitle"]"
+                        asp-route-SongGenres="@ViewData["SearchGenre"]">
+                        @Html.DisplayNameFor(model => model.Song[0].ReleaseDate)</a>
+                </th>
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["GenreSort"]"
+                        asp-route-searchString="@ViewData["SearchTitle"]"
+                        asp-route-SongGenres="@ViewData["SearchGenre"]">
+                        @Html.DisplayNameFor(model => model.Song[0].Genre)</a>
+                </th>
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["PriceSort"]"
+                        asp-route-searchString="@ViewData["SearchTitle"]"
+                        asp-route-SongGenres="@ViewData["SearchGenre"]">
+                        @Html.DisplayNameFor(model => model.Song[0].Price)</a>
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Song)
+            {
+                <tr>
+                    <td>
+                        <input type="checkbox" value="@item.Id" name="selectedSong">
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReleaseDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Genre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <input type="submit" value="Hide Item" class="btn btn-warning">
+    <a class="btn btn-danger" asp-action="DeleteAll">DeleteAll</a>
+</form>

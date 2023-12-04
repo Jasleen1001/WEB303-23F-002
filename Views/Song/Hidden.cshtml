@@ -1,0 +1,37 @@
+@model IEnumerable<Song>
+@{
+    ViewData["Title"] = "Hidden Song";
+}
+
+<h2 class="text-center py-2">List Of Hidden  Song Items</h2>
+<form asp-action="DeleteHiddenSong">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Title)</th>
+                <th>@Html.DisplayNameFor(model => model.Genre)</th>
+                <th>@Html.DisplayNameFor(model => model.ReleaseDate)</th>
+                <th>@Html.DisplayNameFor(model => model.Price)</th>
+                <th>@Html.DisplayNameFor(model => model.Rating)</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var element in Model)
+            {
+                <tr>
+                    <td>
+                        @element.Title
+                    </td>
+                    <td>@element.Genre</td>
+                    <td>@element.ReleaseDate</td>
+                    <td>@element.Price</td>
+                    <td>@element.Rating</td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+    <input type="submit" value="Delete All Hidden Records" class="btn btn-danger">
+</form>
+<a asp-action="Index">Back To List</a>
